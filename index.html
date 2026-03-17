@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="luminaBlog">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuminaBlog - A Modern Minimalist Writing Platform</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Modular CSS -->
+    <link href="styles/main.css" rel="stylesheet">
+
+    <!-- AngularJS 1.8.x & ngRoute -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+    <!-- App Configuration -->
+    <script src="app.js"></script>
+
+    <!-- Services -->
+    <script src="services/authService.js"></script>
+    <script src="services/blogService.js"></script>
+
+    <!-- Controllers -->
+    <script src="controllers/authController.js"></script>
+    <script src="controllers/blogController.js"></script>
+</head>
+<body ng-controller="MainController">
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a class="navbar-brand" href="#!/feed">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--electric-purple);">
+                <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                <path d="M2 2l7.586 7.586"></path>
+                <circle cx="11" cy="11" r="2"></circle>
+            </svg>
+            Lumina<span>Blog</span>
+        </a>
+        <div class="nav-links" ng-if="!isLoggedIn()">
+            <a class="nav-item" ng-class="{'active': isActive('/login')}" href="#!/login">Log In</a>
+            <a class="nav-item" ng-class="{'active': isActive('/register')}" href="#!/register">Sign Up</a>
+        </div>
+        <div class="nav-links" ng-if="isLoggedIn()">
+            <span class="nav-item" style="color: var(--text-main); font-weight: 600; cursor: default;">{{getCurrentUser().name}}</span>
+            <a class="nav-item" ng-class="{'active': isActive('/feed')}" href="#!/feed">Feed</a>
+            <a class="nav-item" ng-class="{'active': isActive('/creator')}" href="#!/creator">Write</a>
+            <a class="nav-item" ng-click="logout()" style="color: var(--danger);">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main View Container -->
+    <div class="container">
+        <div ng-view></div>
+    </div>
+
+</body>
+</html>
