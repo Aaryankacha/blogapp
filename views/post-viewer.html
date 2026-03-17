@@ -1,0 +1,30 @@
+<div class="view-section viewer-container">
+    <a class="btn-back" ng-href="#!/feed">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Feed
+    </a>
+    
+    <div class="viewer-header" ng-if="currentPost">
+        <span class="viewer-category">{{currentPost.category}}</span>
+        <h1 class="viewer-title">{{currentPost.title}}</h1>
+        <div class="viewer-meta">
+            <span class="author">By {{currentPost.authorName}}</span>
+            <span class="dot"></span>
+            <span class="date">{{currentPost.date | date:'MMMM d, yyyy'}}</span>
+        </div>
+    </div>
+
+    <div class="viewer-img-container" ng-if="currentPost">
+        <img ng-src="{{currentPost.coverImage || 'https://images.unsplash.com/photo-1516382760799-ac8735dfbf86?q=80&w=2609&auto=format&fit=crop'}}" alt="{{currentPost.title}}" class="viewer-img" onerror="this.src='https://images.unsplash.com/photo-1516382760799-ac8735dfbf86?q=80&w=2600&auto=format&fit=crop'">
+    </div>
+
+    <div class="viewer-content" ng-if="currentPost">{{currentPost.content}}</div>
+    
+    <div class="empty-state" ng-if="!currentPost">
+        <h3>Post not found</h3>
+        <p>This story might have been removed or the link is invalid.</p>
+    </div>
+</div>
